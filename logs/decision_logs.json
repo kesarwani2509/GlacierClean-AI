@@ -1,0 +1,3256 @@
+[
+  {
+    "timestamp": "2026-09-10T19:38:51.128633",
+    "source_file": "tmpzmdbbwgs.csv",
+    "fingerprint": "30f9bc9f",
+    "shape_original": [
+      8399,
+      10
+    ],
+    "shape_cleaned": [
+      8399,
+      10
+    ],
+    "source": "llm",
+    "issues": [
+      {
+        "column": "Sales",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 8153,
+        "affected_pct": 0.9707,
+        "description": "'Sales' has 97.1% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Profit",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 1704,
+        "affected_pct": 0.20288129539230862,
+        "description": "'Profit' has 1704 IQR outliers (20.3%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Sales",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 1042,
+        "affected_pct": 0.124062388379569,
+        "description": "'Sales' has 1042 IQR outliers (12.4%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Shipping_Cost",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 972,
+        "affected_pct": 0.11572806286462674,
+        "description": "'Shipping_Cost' has 972 IQR outliers (11.6%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Product_Base_Margin",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.0061,
+        "description": "'Product_Base_Margin' has very low cardinality (51 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Order_Quantity",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.006,
+        "description": "'Order_Quantity' has very low cardinality (50 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Prod_id",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.002,
+        "description": "'Prod_id' has very low cardinality (17 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Discount",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.0019,
+        "description": "'Discount' has very low cardinality (16 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Profit",
+        "operation": "cap_outliers",
+        "params": {
+          "method": "iqr",
+          "multiplier": 1.5
+        },
+        "source": "llm",
+        "rationale": "To reduce the impact of extreme values on analysis."
+      },
+      {
+        "column": "Sales",
+        "operation": "cap_outliers",
+        "params": {
+          "method": "iqr",
+          "multiplier": 1.5
+        },
+        "source": "llm",
+        "rationale": "To reduce the impact of extreme values on analysis."
+      },
+      {
+        "column": "Shipping_Cost",
+        "operation": "cap_outliers",
+        "params": {
+          "method": "iqr",
+          "multiplier": 1.5
+        },
+        "source": "llm",
+        "rationale": "To reduce the impact of extreme values on analysis."
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Profit",
+        "operation": "cap_outliers",
+        "status": "success",
+        "message": "Capped outliers using 'iqr'"
+      },
+      {
+        "column": "Sales",
+        "operation": "cap_outliers",
+        "status": "success",
+        "message": "Capped outliers using 'iqr'"
+      },
+      {
+        "column": "Shipping_Cost",
+        "operation": "cap_outliers",
+        "status": "success",
+        "message": "Capped outliers using 'iqr'"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +1.11%. Improved: overall, validity. Actions: 3 succeeded.",
+      "delta": {
+        "overall": 0.0111,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0443,
+        "rows_removed": 0,
+        "improved": "True"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9557,
+          "overall": 0.9887
+        },
+        "details": {
+          "missing_by_column": {
+            "Product_Base_Margin": 0.0075
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "Sales": 1042,
+            "Discount": 3,
+            "Profit": 1704,
+            "Shipping_Cost": 972
+          }
+        },
+        "dataset_info": {
+          "n_rows": 8399,
+          "n_columns": 10
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9998
+        },
+        "details": {
+          "missing_by_column": {
+            "Product_Base_Margin": 0.0075
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "Discount": 3
+          }
+        },
+        "dataset_info": {
+          "n_rows": 8399,
+          "n_columns": 10
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9557,
+          "overall": 0.9887
+        },
+        "after": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9998
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0443,
+          "overall": 0.0111
+        },
+        "improved": "True",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +1.11%. Improved: overall, validity. Actions: 3 succeeded.",
+        "n_rows_before": 8399,
+        "n_rows_after": 8399,
+        "n_cols_before": 10,
+        "n_cols_after": 10
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T01:34:41.209261",
+    "source_file": "tmpct8sg3h9.xlsx",
+    "fingerprint": "5e68a5ec",
+    "shape_original": [
+      3024,
+      12
+    ],
+    "shape_cleaned": [
+      3024,
+      12
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "Trading_Volume",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 2914,
+        "affected_pct": 0.9636,
+        "description": "'Trading_Volume' has 96.4% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Sentiment",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 171,
+        "affected_pct": 0.0565,
+        "description": "Column 'Sentiment' has 5.7% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Index_Change_Percent",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 161,
+        "affected_pct": 0.0532,
+        "description": "Column 'Index_Change_Percent' has 5.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "News_Url",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 153,
+        "affected_pct": 0.0506,
+        "description": "Column 'News_Url' has 5.1% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Market_Event",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.0066,
+        "description": "'Market_Event' has very low cardinality (20 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Source",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.006,
+        "description": "'Source' has very low cardinality (18 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Market_Index",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.006,
+        "description": "'Market_Index' has very low cardinality (18 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Sector",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.006,
+        "description": "'Sector' has very low cardinality (18 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Related_Company",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.0033,
+        "description": "'Related_Company' has very low cardinality (10 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Sentiment",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.001,
+        "description": "'Sentiment' has very low cardinality (3 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Impact_Level",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.001,
+        "description": "'Impact_Level' has very low cardinality (3 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Full Dataset",
+        "operation": "remove_duplicates",
+        "params": {
+          "keep": "none"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Full Dataset",
+        "operation": "remove_duplicates",
+        "status": "success",
+        "message": "Removed 0 duplicate row(s)"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "details": {
+          "missing_by_column": {
+            "Headline": 0.0489,
+            "Index_Change_Percent": 0.0532,
+            "Sentiment": 0.0565,
+            "News_Url": 0.0506
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 3024,
+          "n_columns": 12
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "details": {
+          "missing_by_column": {
+            "Headline": 0.0489,
+            "Index_Change_Percent": 0.0532,
+            "Sentiment": 0.0565,
+            "News_Url": 0.0506
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 3024,
+          "n_columns": 12
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "after": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded.",
+        "n_rows_before": 3024,
+        "n_rows_after": 3024,
+        "n_cols_before": 12,
+        "n_cols_after": 12
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T01:38:46.135901",
+    "source_file": "tmpct8sg3h9.xlsx",
+    "fingerprint": "5e68a5ec",
+    "shape_original": [
+      3024,
+      12
+    ],
+    "shape_cleaned": [
+      3024,
+      12
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "Trading_Volume",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 2914,
+        "affected_pct": 0.9636,
+        "description": "'Trading_Volume' has 96.4% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Sentiment",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 171,
+        "affected_pct": 0.0565,
+        "description": "Column 'Sentiment' has 5.7% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Index_Change_Percent",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 161,
+        "affected_pct": 0.0532,
+        "description": "Column 'Index_Change_Percent' has 5.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "News_Url",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 153,
+        "affected_pct": 0.0506,
+        "description": "Column 'News_Url' has 5.1% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Market_Event",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.0066,
+        "description": "'Market_Event' has very low cardinality (20 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Source",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.006,
+        "description": "'Source' has very low cardinality (18 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Market_Index",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.006,
+        "description": "'Market_Index' has very low cardinality (18 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Sector",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.006,
+        "description": "'Sector' has very low cardinality (18 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Related_Company",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.0033,
+        "description": "'Related_Company' has very low cardinality (10 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Sentiment",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.001,
+        "description": "'Sentiment' has very low cardinality (3 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Impact_Level",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 3024,
+        "affected_pct": 0.001,
+        "description": "'Impact_Level' has very low cardinality (3 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Full Dataset",
+        "operation": "remove_duplicates",
+        "params": {
+          "keep": "none"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      },
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "constant"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Full Dataset",
+        "operation": "remove_duplicates",
+        "status": "success",
+        "message": "Removed 0 duplicate row(s)"
+      },
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "status": "error",
+        "message": "Column 'Full Dataset' not found in DataFrame."
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded, 1 failed.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "details": {
+          "missing_by_column": {
+            "Headline": 0.0489,
+            "Index_Change_Percent": 0.0532,
+            "Sentiment": 0.0565,
+            "News_Url": 0.0506
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 3024,
+          "n_columns": 12
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "details": {
+          "missing_by_column": {
+            "Headline": 0.0489,
+            "Index_Change_Percent": 0.0532,
+            "Sentiment": 0.0565,
+            "News_Url": 0.0506
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 3024,
+          "n_columns": 12
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "after": {
+          "completeness": 0.9826,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9948
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded, 1 failed.",
+        "n_rows_before": 3024,
+        "n_rows_after": 3024,
+        "n_cols_before": 12,
+        "n_cols_after": 12
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T01:42:18.999510",
+    "source_file": "tmp0gkhvcgy.csv",
+    "fingerprint": "fb17559a",
+    "shape_original": [
+      2938,
+      22
+    ],
+    "shape_cleaned": [
+      2938,
+      22
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "Population",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 652,
+        "affected_pct": 0.2219,
+        "description": "Column 'Population' has 22.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Hepatitis B",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 553,
+        "affected_pct": 0.1882,
+        "description": "Column 'Hepatitis B' has 18.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Measles ",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 542,
+        "affected_pct": 0.18447923757658272,
+        "description": "'Measles ' has 542 IQR outliers (18.4%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": " HIV/AIDS",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 542,
+        "affected_pct": 0.18447923757658272,
+        "description": "' HIV/AIDS' has 542 IQR outliers (18.4%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "GDP",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 448,
+        "affected_pct": 0.1525,
+        "description": "Column 'GDP' has 15.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "GDP",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 365,
+        "affected_pct": 0.1465863453815261,
+        "description": "'GDP' has 365 IQR outliers (14.7%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "under-five deaths ",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 394,
+        "affected_pct": 0.13410483321987746,
+        "description": "'under-five deaths ' has 394 IQR outliers (13.4%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "percentage expenditure",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 389,
+        "affected_pct": 0.13240299523485363,
+        "description": "'percentage expenditure' has 389 IQR outliers (13.2%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Population",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 294,
+        "affected_pct": 0.12860892388451445,
+        "description": "'Population' has 294 IQR outliers (12.9%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "infant deaths",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 315,
+        "affected_pct": 0.10721579305650102,
+        "description": "'infant deaths' has 315 IQR outliers (10.7%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Total expenditure",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 226,
+        "affected_pct": 0.0769,
+        "description": "Column 'Total expenditure' has 7.7% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Alcohol",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 194,
+        "affected_pct": 0.066,
+        "description": "Column 'Alcohol' has 6.6% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Income composition of resources",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 167,
+        "affected_pct": 0.0568,
+        "description": "Column 'Income composition of resources' has 5.7% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Schooling",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 163,
+        "affected_pct": 0.0555,
+        "description": "Column 'Schooling' has 5.5% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Income composition of resources",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 130,
+        "affected_pct": 0.04691447130999639,
+        "description": "'Income composition of resources' has 130 IQR outliers (4.7%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": " thinness 5-9 years",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 96,
+        "affected_pct": 0.03305785123966942,
+        "description": "' thinness 5-9 years' has 96 IQR outliers (3.3%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": " thinness  1-19 years",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 89,
+        "affected_pct": 0.030647382920110194,
+        "description": "' thinness  1-19 years' has 89 IQR outliers (3.1%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Adult Mortality",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 82,
+        "affected_pct": 0.028005464480874317,
+        "description": "'Adult Mortality' has 82 IQR outliers (2.8%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Year",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2938,
+        "affected_pct": 0.0054,
+        "description": "'Year' has very low cardinality (16 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Status",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2938,
+        "affected_pct": 0.0007,
+        "description": "'Status' has very low cardinality (2 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Year",
+        "operation": "remove_duplicates",
+        "params": {
+          "keep": "first"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      },
+      {
+        "column": "Country",
+        "operation": "remove_duplicates",
+        "params": {
+          "keep": "first"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Year",
+        "operation": "remove_duplicates",
+        "status": "success",
+        "message": "Removed 0 duplicate row(s)"
+      },
+      {
+        "column": "Country",
+        "operation": "remove_duplicates",
+        "status": "success",
+        "message": "Removed 0 duplicate row(s)"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 2 succeeded.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9603,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9322,
+          "overall": 0.9711
+        },
+        "details": {
+          "missing_by_column": {
+            "Life expectancy ": 0.0034,
+            "Adult Mortality": 0.0034,
+            "Alcohol": 0.066,
+            "Hepatitis B": 0.1882,
+            " BMI ": 0.0116,
+            "Polio": 0.0065,
+            "Total expenditure": 0.0769,
+            "Diphtheria ": 0.0065,
+            "GDP": 0.1525,
+            "Population": 0.2219,
+            " thinness  1-19 years": 0.0116,
+            " thinness 5-9 years": 0.0116,
+            "Income composition of resources": 0.0568,
+            "Schooling": 0.0555
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "Life expectancy ": 10,
+            "Adult Mortality": 82,
+            "infant deaths": 315,
+            "percentage expenditure": 389,
+            "Hepatitis B": 254,
+            "Measles ": 542,
+            "under-five deaths ": 394,
+            "Polio": 279,
+            "Total expenditure": 32,
+            "Diphtheria ": 298,
+            " HIV/AIDS": 542,
+            "GDP": 365,
+            "Population": 294,
+            " thinness  1-19 years": 89,
+            " thinness 5-9 years": 96,
+            "Income composition of resources": 130,
+            "Schooling": 44
+          }
+        },
+        "dataset_info": {
+          "n_rows": 2938,
+          "n_columns": 22
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9603,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9322,
+          "overall": 0.9711
+        },
+        "details": {
+          "missing_by_column": {
+            "Life expectancy ": 0.0034,
+            "Adult Mortality": 0.0034,
+            "Alcohol": 0.066,
+            "Hepatitis B": 0.1882,
+            " BMI ": 0.0116,
+            "Polio": 0.0065,
+            "Total expenditure": 0.0769,
+            "Diphtheria ": 0.0065,
+            "GDP": 0.1525,
+            "Population": 0.2219,
+            " thinness  1-19 years": 0.0116,
+            " thinness 5-9 years": 0.0116,
+            "Income composition of resources": 0.0568,
+            "Schooling": 0.0555
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "Life expectancy ": 10,
+            "Adult Mortality": 82,
+            "infant deaths": 315,
+            "percentage expenditure": 389,
+            "Hepatitis B": 254,
+            "Measles ": 542,
+            "under-five deaths ": 394,
+            "Polio": 279,
+            "Total expenditure": 32,
+            "Diphtheria ": 298,
+            " HIV/AIDS": 542,
+            "GDP": 365,
+            "Population": 294,
+            " thinness  1-19 years": 89,
+            " thinness 5-9 years": 96,
+            "Income composition of resources": 130,
+            "Schooling": 44
+          }
+        },
+        "dataset_info": {
+          "n_rows": 2938,
+          "n_columns": 22
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9603,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9322,
+          "overall": 0.9711
+        },
+        "after": {
+          "completeness": 0.9603,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9322,
+          "overall": 0.9711
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 2 succeeded.",
+        "n_rows_before": 2938,
+        "n_rows_after": 2938,
+        "n_cols_before": 22,
+        "n_cols_after": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T02:23:12.269374",
+    "source_file": "tmpxdb_53cg.csv",
+    "fingerprint": "fcaad7b5",
+    "shape_original": [
+      22000,
+      14
+    ],
+    "shape_cleaned": [
+      22000,
+      13
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "date_added",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 21878,
+        "affected_pct": 0.9945,
+        "description": "Column 'date_added' has 99.5% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "salary",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 18554,
+        "affected_pct": 0.8434,
+        "description": "Column 'salary' has 84.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "organization",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 6867,
+        "affected_pct": 0.3121,
+        "description": "Column 'organization' has 31.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "sector",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 5194,
+        "affected_pct": 0.2361,
+        "description": "Column 'sector' has 23.6% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "job_type",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 1628,
+        "affected_pct": 0.074,
+        "description": "Column 'job_type' has 7.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "sector",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0074,
+        "description": "'sector' has very low cardinality (163 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "date_added",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0035,
+        "description": "'date_added' has very low cardinality (78 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "job_type",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0018,
+        "description": "'job_type' has very low cardinality (39 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Full Dataset",
+        "operation": "drop_column",
+        "params": {},
+        "source": "manual",
+        "rationale": "User manual selection"
+      },
+      {
+        "column": "country",
+        "operation": "drop_column",
+        "params": {},
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Full Dataset",
+        "operation": "drop_column",
+        "status": "error",
+        "message": "Column 'Full Dataset' not found in DataFrame."
+      },
+      {
+        "column": "country",
+        "operation": "drop_column",
+        "status": "success",
+        "message": "Dropped column 'country'"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by -0.41%. Regressed: overall, completeness. Actions: 1 succeeded, 1 failed.",
+      "delta": {
+        "overall": -0.0041,
+        "completeness": -0.0135,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "details": {
+          "missing_by_column": {
+            "date_added": 0.9945,
+            "job_type": 0.074,
+            "organization": 0.3121,
+            "salary": 0.8434,
+            "sector": 0.2361
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 22000,
+          "n_columns": 14
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.8108,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9432
+        },
+        "details": {
+          "missing_by_column": {
+            "date_added": 0.9945,
+            "job_type": 0.074,
+            "organization": 0.3121,
+            "salary": 0.8434,
+            "sector": 0.2361
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 22000,
+          "n_columns": 13
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "after": {
+          "completeness": 0.8108,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9432
+        },
+        "delta": {
+          "completeness": -0.0135,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": -0.0041
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by -0.41%. Regressed: overall, completeness. Actions: 1 succeeded, 1 failed.",
+        "n_rows_before": 22000,
+        "n_rows_after": 22000,
+        "n_cols_before": 14,
+        "n_cols_after": 13
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T02:25:50.419633",
+    "source_file": "tmpxdb_53cg.csv",
+    "fingerprint": "fcaad7b5",
+    "shape_original": [
+      22000,
+      14
+    ],
+    "shape_cleaned": [
+      22000,
+      14
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "date_added",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 21878,
+        "affected_pct": 0.9945,
+        "description": "Column 'date_added' has 99.5% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "salary",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 18554,
+        "affected_pct": 0.8434,
+        "description": "Column 'salary' has 84.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "organization",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 6867,
+        "affected_pct": 0.3121,
+        "description": "Column 'organization' has 31.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "sector",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 5194,
+        "affected_pct": 0.2361,
+        "description": "Column 'sector' has 23.6% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "job_type",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 1628,
+        "affected_pct": 0.074,
+        "description": "Column 'job_type' has 7.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "sector",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0074,
+        "description": "'sector' has very low cardinality (163 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "date_added",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0035,
+        "description": "'date_added' has very low cardinality (78 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "job_type",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0018,
+        "description": "'job_type' has very low cardinality (39 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "median"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      },
+      {
+        "column": "Full Dataset",
+        "operation": "drop_column",
+        "params": {},
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "status": "error",
+        "message": "Column 'Full Dataset' not found in DataFrame."
+      },
+      {
+        "column": "Full Dataset",
+        "operation": "drop_column",
+        "status": "error",
+        "message": "Column 'Full Dataset' not found in DataFrame."
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 2 failed.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "details": {
+          "missing_by_column": {
+            "date_added": 0.9945,
+            "job_type": 0.074,
+            "organization": 0.3121,
+            "salary": 0.8434,
+            "sector": 0.2361
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 22000,
+          "n_columns": 14
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "details": {
+          "missing_by_column": {
+            "date_added": 0.9945,
+            "job_type": 0.074,
+            "organization": 0.3121,
+            "salary": 0.8434,
+            "sector": 0.2361
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 22000,
+          "n_columns": 14
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "after": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 2 failed.",
+        "n_rows_before": 22000,
+        "n_rows_after": 22000,
+        "n_cols_before": 14,
+        "n_cols_after": 14
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T02:29:13.153618",
+    "source_file": "tmp66ljsrxj.csv",
+    "fingerprint": "fcaad7b5",
+    "shape_original": [
+      22000,
+      14
+    ],
+    "shape_cleaned": [
+      22000,
+      14
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "date_added",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 21878,
+        "affected_pct": 0.9945,
+        "description": "Column 'date_added' has 99.5% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "salary",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 18554,
+        "affected_pct": 0.8434,
+        "description": "Column 'salary' has 84.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "organization",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 6867,
+        "affected_pct": 0.3121,
+        "description": "Column 'organization' has 31.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "sector",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 5194,
+        "affected_pct": 0.2361,
+        "description": "Column 'sector' has 23.6% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "job_type",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 1628,
+        "affected_pct": 0.074,
+        "description": "Column 'job_type' has 7.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "sector",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0074,
+        "description": "'sector' has very low cardinality (163 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "date_added",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0035,
+        "description": "'date_added' has very low cardinality (78 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "job_type",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 22000,
+        "affected_pct": 0.0018,
+        "description": "'job_type' has very low cardinality (39 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "organization",
+        "operation": "remove_duplicates",
+        "params": {
+          "keep": "first"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      },
+      {
+        "column": "organization",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "median"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "organization",
+        "operation": "remove_duplicates",
+        "status": "success",
+        "message": "Removed 0 duplicate row(s)"
+      },
+      {
+        "column": "organization",
+        "operation": "impute_missing",
+        "status": "error",
+        "message": "Cannot use 'median' strategy on non-numeric column 'organization'"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded, 1 failed.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "details": {
+          "missing_by_column": {
+            "date_added": 0.9945,
+            "job_type": 0.074,
+            "organization": 0.3121,
+            "salary": 0.8434,
+            "sector": 0.2361
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 22000,
+          "n_columns": 14
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "details": {
+          "missing_by_column": {
+            "date_added": 0.9945,
+            "job_type": 0.074,
+            "organization": 0.3121,
+            "salary": 0.8434,
+            "sector": 0.2361
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 22000,
+          "n_columns": 14
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "after": {
+          "completeness": 0.8243,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9473
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded, 1 failed.",
+        "n_rows_before": 22000,
+        "n_rows_after": 22000,
+        "n_cols_before": 14,
+        "n_cols_after": 14
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T12:28:22.556347",
+    "source_file": "tmp5nc7_i_c.csv",
+    "fingerprint": "30f9bc9f",
+    "shape_original": [
+      8399,
+      10
+    ],
+    "shape_cleaned": [
+      8399,
+      10
+    ],
+    "source": "llm",
+    "issues": [
+      {
+        "column": "Sales",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 8153,
+        "affected_pct": 0.9707,
+        "description": "'Sales' has 97.1% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Profit",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 1704,
+        "affected_pct": 0.20288129539230862,
+        "description": "'Profit' has 1704 IQR outliers (20.3%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Sales",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 1042,
+        "affected_pct": 0.124062388379569,
+        "description": "'Sales' has 1042 IQR outliers (12.4%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Shipping_Cost",
+        "issue_type": "outliers",
+        "severity": "medium",
+        "affected_rows": 972,
+        "affected_pct": 0.11572806286462674,
+        "description": "'Shipping_Cost' has 972 IQR outliers (11.6%).",
+        "recommended_action": "cap outliers using IQR fences"
+      },
+      {
+        "column": "Product_Base_Margin",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.0061,
+        "description": "'Product_Base_Margin' has very low cardinality (51 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Order_Quantity",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.006,
+        "description": "'Order_Quantity' has very low cardinality (50 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Prod_id",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.002,
+        "description": "'Prod_id' has very low cardinality (17 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Discount",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 8399,
+        "affected_pct": 0.0019,
+        "description": "'Discount' has very low cardinality (16 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Profit",
+        "operation": "cap_outliers",
+        "params": {
+          "method": "iqr",
+          "multiplier": 1.5
+        },
+        "source": "llm",
+        "rationale": "Reduces distribution skewness caused by 20.3% extreme values."
+      },
+      {
+        "column": "Sales",
+        "operation": "cap_outliers",
+        "params": {
+          "method": "iqr",
+          "multiplier": 1.5
+        },
+        "source": "llm",
+        "rationale": "Mitigates distortion from extreme transaction amounts."
+      },
+      {
+        "column": "Shipping_Cost",
+        "operation": "cap_outliers",
+        "params": {
+          "method": "iqr",
+          "multiplier": 1.5
+        },
+        "source": "llm",
+        "rationale": "Normalizes costs affected by 11.6% outliers."
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Profit",
+        "operation": "cap_outliers",
+        "status": "success",
+        "message": "Capped outliers using 'iqr'"
+      },
+      {
+        "column": "Sales",
+        "operation": "cap_outliers",
+        "status": "success",
+        "message": "Capped outliers using 'iqr'"
+      },
+      {
+        "column": "Shipping_Cost",
+        "operation": "cap_outliers",
+        "status": "success",
+        "message": "Capped outliers using 'iqr'"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +1.11%. Improved: overall, validity. Actions: 3 succeeded.",
+      "delta": {
+        "overall": 0.0111,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0443,
+        "rows_removed": 0,
+        "improved": "True"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9557,
+          "overall": 0.9887
+        },
+        "details": {
+          "missing_by_column": {
+            "Product_Base_Margin": 0.0075
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "Sales": 1042,
+            "Discount": 3,
+            "Profit": 1704,
+            "Shipping_Cost": 972
+          }
+        },
+        "dataset_info": {
+          "n_rows": 8399,
+          "n_columns": 10
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9998
+        },
+        "details": {
+          "missing_by_column": {
+            "Product_Base_Margin": 0.0075
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "Discount": 3
+          }
+        },
+        "dataset_info": {
+          "n_rows": 8399,
+          "n_columns": 10
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9557,
+          "overall": 0.9887
+        },
+        "after": {
+          "completeness": 0.9992,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9998
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0443,
+          "overall": 0.0111
+        },
+        "improved": "True",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +1.11%. Improved: overall, validity. Actions: 3 succeeded.",
+        "n_rows_before": 8399,
+        "n_rows_after": 8399,
+        "n_cols_before": 10,
+        "n_cols_after": 10
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T12:32:22.798503",
+    "source_file": "tmpxty3gs8w.csv",
+    "fingerprint": "e5253c7d",
+    "shape_original": [
+      1000,
+      6
+    ],
+    "shape_cleaned": [
+      1000,
+      6
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "id",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 1000,
+        "affected_pct": 1.0,
+        "description": "'id' has 100.0% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "email",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 108,
+        "affected_pct": 0.108,
+        "description": "Column 'email' has 10.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "address",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 103,
+        "affected_pct": 0.103,
+        "description": "Column 'address' has 10.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "phone",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 98,
+        "affected_pct": 0.098,
+        "description": "Column 'phone' has 9.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "signup_date",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 98,
+        "affected_pct": 0.098,
+        "description": "Column 'signup_date' has 9.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "full_name",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 84,
+        "affected_pct": 0.084,
+        "description": "Column 'full_name' has 8.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      }
+    ],
+    "actions": [
+      {
+        "column": "address",
+        "operation": "remove_duplicates",
+        "params": {
+          "keep": "none"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "address",
+        "operation": "remove_duplicates",
+        "status": "success",
+        "message": "Removed 0 duplicate row(s)"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "details": {
+          "missing_by_column": {
+            "full_name": 0.084,
+            "email": 0.108,
+            "phone": 0.098,
+            "address": 0.103,
+            "signup_date": 0.098
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 1000,
+          "n_columns": 6
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "details": {
+          "missing_by_column": {
+            "full_name": 0.084,
+            "email": 0.108,
+            "phone": 0.098,
+            "address": 0.103,
+            "signup_date": 0.098
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 1000,
+          "n_columns": 6
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "after": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 1 succeeded.",
+        "n_rows_before": 1000,
+        "n_rows_after": 1000,
+        "n_cols_before": 6,
+        "n_cols_after": 6
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T12:33:18.749471",
+    "source_file": "tmpxty3gs8w.csv",
+    "fingerprint": "e5253c7d",
+    "shape_original": [
+      1000,
+      6
+    ],
+    "shape_cleaned": [
+      1000,
+      6
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "id",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 1000,
+        "affected_pct": 1.0,
+        "description": "'id' has 100.0% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "email",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 108,
+        "affected_pct": 0.108,
+        "description": "Column 'email' has 10.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "address",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 103,
+        "affected_pct": 0.103,
+        "description": "Column 'address' has 10.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "phone",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 98,
+        "affected_pct": 0.098,
+        "description": "Column 'phone' has 9.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "signup_date",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 98,
+        "affected_pct": 0.098,
+        "description": "Column 'signup_date' has 9.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "full_name",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 84,
+        "affected_pct": 0.084,
+        "description": "Column 'full_name' has 8.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      }
+    ],
+    "actions": [
+      {
+        "column": "address",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "mean"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "address",
+        "operation": "impute_missing",
+        "status": "error",
+        "message": "Cannot use 'mean' strategy on non-numeric column 'address'"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 1 failed.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "details": {
+          "missing_by_column": {
+            "full_name": 0.084,
+            "email": 0.108,
+            "phone": 0.098,
+            "address": 0.103,
+            "signup_date": 0.098
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 1000,
+          "n_columns": 6
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "details": {
+          "missing_by_column": {
+            "full_name": 0.084,
+            "email": 0.108,
+            "phone": 0.098,
+            "address": 0.103,
+            "signup_date": 0.098
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 1000,
+          "n_columns": 6
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "after": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 1 failed.",
+        "n_rows_before": 1000,
+        "n_rows_after": 1000,
+        "n_cols_before": 6,
+        "n_cols_after": 6
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T12:34:25.110881",
+    "source_file": "tmpxty3gs8w.csv",
+    "fingerprint": "e5253c7d",
+    "shape_original": [
+      1000,
+      6
+    ],
+    "shape_cleaned": [
+      1000,
+      6
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "id",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 1000,
+        "affected_pct": 1.0,
+        "description": "'id' has 100.0% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "email",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 108,
+        "affected_pct": 0.108,
+        "description": "Column 'email' has 10.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "address",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 103,
+        "affected_pct": 0.103,
+        "description": "Column 'address' has 10.3% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "phone",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 98,
+        "affected_pct": 0.098,
+        "description": "Column 'phone' has 9.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "signup_date",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 98,
+        "affected_pct": 0.098,
+        "description": "Column 'signup_date' has 9.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "full_name",
+        "issue_type": "high_missing_rate",
+        "severity": "medium",
+        "affected_rows": 84,
+        "affected_pct": 0.084,
+        "description": "Column 'full_name' has 8.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "mean"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "status": "error",
+        "message": "Column 'Full Dataset' not found in DataFrame."
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 1 failed.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "details": {
+          "missing_by_column": {
+            "full_name": 0.084,
+            "email": 0.108,
+            "phone": 0.098,
+            "address": 0.103,
+            "signup_date": 0.098
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 1000,
+          "n_columns": 6
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "details": {
+          "missing_by_column": {
+            "full_name": 0.084,
+            "email": 0.108,
+            "phone": 0.098,
+            "address": 0.103,
+            "signup_date": 0.098
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 1000,
+          "n_columns": 6
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "after": {
+          "completeness": 0.9182,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.9755
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 1 failed.",
+        "n_rows_before": 1000,
+        "n_rows_after": 1000,
+        "n_cols_before": 6,
+        "n_cols_after": 6
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T12:37:06.963670",
+    "source_file": "tmp3xr186y0.csv",
+    "fingerprint": "22a8262e",
+    "shape_original": [
+      2500,
+      12
+    ],
+    "shape_cleaned": [
+      2500,
+      12
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "Discount_%",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 1651,
+        "affected_pct": 0.6604,
+        "description": "Column 'Discount_%' has 66.0% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Units_Sold",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 1306,
+        "affected_pct": 0.5224,
+        "description": "Column 'Units_Sold' has 52.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Unit_Price",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 1210,
+        "affected_pct": 0.484,
+        "description": "Column 'Unit_Price' has 48.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Segment",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 821,
+        "affected_pct": 0.3284,
+        "description": "Column 'Segment' has 32.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Order_Date",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 606,
+        "affected_pct": 0.2424,
+        "description": "Column 'Order_Date' has 24.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Profit",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 2491,
+        "affected_pct": 0.9964,
+        "description": "'Profit' has 99.6% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Order_ID",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 2391,
+        "affected_pct": 0.9564,
+        "description": "'Order_ID' has 95.6% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Product_Name",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0096,
+        "description": "'Product_Name' has very low cardinality (24 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Units_Sold",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0036,
+        "description": "'Units_Sold' has very low cardinality (9 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "City",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0036,
+        "description": "'City' has very low cardinality (9 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Product_Category",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0024,
+        "description": "'Product_Category' has very low cardinality (6 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Segment",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0008,
+        "description": "'Segment' has very low cardinality (2 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "mean"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Full Dataset",
+        "operation": "impute_missing",
+        "status": "error",
+        "message": "Column 'Full Dataset' not found in DataFrame."
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 1 failed.",
+      "delta": {
+        "overall": 0.0,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": 0.0,
+        "rows_removed": 0,
+        "improved": "False"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.8135,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.944
+        },
+        "details": {
+          "missing_by_column": {
+            "Units_Sold": 0.5224,
+            "Unit_Price": 0.484,
+            "Discount_%": 0.6604,
+            "Order_Date": 0.2424,
+            "Segment": 0.3284
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 2500,
+          "n_columns": 12
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.8135,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.944
+        },
+        "details": {
+          "missing_by_column": {
+            "Units_Sold": 0.5224,
+            "Unit_Price": 0.484,
+            "Discount_%": 0.6604,
+            "Order_Date": 0.2424,
+            "Segment": 0.3284
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 2500,
+          "n_columns": 12
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.8135,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.944
+        },
+        "after": {
+          "completeness": 0.8135,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.944
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": 0.0,
+          "overall": 0.0
+        },
+        "improved": "False",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +0.00%. Actions: 0 succeeded, 1 failed.",
+        "n_rows_before": 2500,
+        "n_rows_after": 2500,
+        "n_cols_before": 12,
+        "n_cols_after": 12
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-14T12:39:40.223243",
+    "source_file": "tmpo3r7ifrm.csv",
+    "fingerprint": "22a8262e",
+    "shape_original": [
+      2500,
+      12
+    ],
+    "shape_cleaned": [
+      2500,
+      12
+    ],
+    "source": "llm",
+    "issues": [
+      {
+        "column": "Discount_%",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 1651,
+        "affected_pct": 0.6604,
+        "description": "Column 'Discount_%' has 66.0% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Units_Sold",
+        "issue_type": "high_missing_rate",
+        "severity": "critical",
+        "affected_rows": 1306,
+        "affected_pct": 0.5224,
+        "description": "Column 'Units_Sold' has 52.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Unit_Price",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 1210,
+        "affected_pct": 0.484,
+        "description": "Column 'Unit_Price' has 48.4% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Segment",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 821,
+        "affected_pct": 0.3284,
+        "description": "Column 'Segment' has 32.8% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Order_Date",
+        "issue_type": "high_missing_rate",
+        "severity": "high",
+        "affected_rows": 606,
+        "affected_pct": 0.2424,
+        "description": "Column 'Order_Date' has 24.2% missing values.",
+        "recommended_action": "impute or drop depending on semantic type"
+      },
+      {
+        "column": "Profit",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 2491,
+        "affected_pct": 0.9964,
+        "description": "'Profit' has 99.6% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Order_ID",
+        "issue_type": "unexpected_high_cardinality",
+        "severity": "medium",
+        "affected_rows": 2391,
+        "affected_pct": 0.9564,
+        "description": "'Order_ID' has 95.6% unique values but isn't an identifier.",
+        "recommended_action": "verify if column should be categorical or contains noisy data"
+      },
+      {
+        "column": "Product_Name",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0096,
+        "description": "'Product_Name' has very low cardinality (24 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Units_Sold",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0036,
+        "description": "'Units_Sold' has very low cardinality (9 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "City",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0036,
+        "description": "'City' has very low cardinality (9 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Product_Category",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0024,
+        "description": "'Product_Category' has very low cardinality (6 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "Segment",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 2500,
+        "affected_pct": 0.0008,
+        "description": "'Segment' has very low cardinality (2 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Discount_%",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "median"
+        },
+        "source": "llm",
+        "rationale": "Missing discounts typically indicate no discount applied."
+      },
+      {
+        "column": "Units_Sold",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "median"
+        },
+        "source": "llm",
+        "rationale": "Fills missing counts using central tendency."
+      },
+      {
+        "column": "Unit_Price",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "median"
+        },
+        "source": "llm",
+        "rationale": "Restores missing pricing data robustly."
+      },
+      {
+        "column": "Segment",
+        "operation": "impute_missing",
+        "params": {
+          "strategy": "mode"
+        },
+        "source": "llm",
+        "rationale": "Fills low-cardinality categorical gaps effectively."
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Discount_%",
+        "operation": "impute_missing",
+        "status": "success",
+        "message": "Imputed missing values using 'median'"
+      },
+      {
+        "column": "Units_Sold",
+        "operation": "impute_missing",
+        "status": "success",
+        "message": "Imputed missing values using 'median'"
+      },
+      {
+        "column": "Unit_Price",
+        "operation": "impute_missing",
+        "status": "success",
+        "message": "Imputed missing values using 'median'"
+      },
+      {
+        "column": "Segment",
+        "operation": "impute_missing",
+        "status": "success",
+        "message": "Imputed missing values using 'mode'"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +4.03%. Improved: overall, completeness. Regressed: validity. Actions: 4 succeeded.",
+      "delta": {
+        "overall": 0.0403,
+        "completeness": 0.1663,
+        "consistency": 0.0,
+        "uniqueness": 0.0,
+        "validity": -0.0386,
+        "rows_removed": 0,
+        "improved": "True"
+      },
+      "before": {
+        "scores": {
+          "completeness": 0.8135,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.944
+        },
+        "details": {
+          "missing_by_column": {
+            "Units_Sold": 0.5224,
+            "Unit_Price": 0.484,
+            "Discount_%": 0.6604,
+            "Order_Date": 0.2424,
+            "Segment": 0.3284
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {}
+        },
+        "dataset_info": {
+          "n_rows": 2500,
+          "n_columns": 12
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 0.9798,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9614,
+          "overall": 0.9843
+        },
+        "details": {
+          "missing_by_column": {
+            "Order_Date": 0.2424
+          },
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "Unit_Price": 1157
+          }
+        },
+        "dataset_info": {
+          "n_rows": 2500,
+          "n_columns": 12
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 0.8135,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 1.0,
+          "overall": 0.944
+        },
+        "after": {
+          "completeness": 0.9798,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9614,
+          "overall": 0.9843
+        },
+        "delta": {
+          "completeness": 0.1663,
+          "consistency": 0.0,
+          "uniqueness": 0.0,
+          "validity": -0.0386,
+          "overall": 0.0403
+        },
+        "improved": "True",
+        "rows_removed": 0,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +4.03%. Improved: overall, completeness. Regressed: validity. Actions: 4 succeeded.",
+        "n_rows_before": 2500,
+        "n_rows_after": 2500,
+        "n_cols_before": 12,
+        "n_cols_after": 12
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-24T16:53:52.766089",
+    "source_file": "tmp_kzjrx0n.csv",
+    "fingerprint": "cb899db2",
+    "shape_original": [
+      1025,
+      14
+    ],
+    "shape_cleaned": [
+      302,
+      14
+    ],
+    "source": "manual",
+    "issues": [
+      {
+        "column": "__dataset__",
+        "issue_type": "duplicate_rows",
+        "severity": "high",
+        "affected_rows": 723,
+        "affected_pct": 0.7053658536585365,
+        "description": "Dataset contains 723 duplicate rows (70.5%).",
+        "recommended_action": "remove duplicates keeping first occurrence"
+      },
+      {
+        "column": "ca",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.0049,
+        "description": "'ca' has very low cardinality (5 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "cp",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.0039,
+        "description": "'cp' has very low cardinality (4 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "thal",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.0039,
+        "description": "'thal' has very low cardinality (4 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "restecg",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.0029,
+        "description": "'restecg' has very low cardinality (3 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "slope",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.0029,
+        "description": "'slope' has very low cardinality (3 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "sex",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.002,
+        "description": "'sex' has very low cardinality (2 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "fbs",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.002,
+        "description": "'fbs' has very low cardinality (2 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "exang",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.002,
+        "description": "'exang' has very low cardinality (2 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      },
+      {
+        "column": "target",
+        "issue_type": "low_cardinality",
+        "severity": "low",
+        "affected_rows": 1025,
+        "affected_pct": 0.002,
+        "description": "'target' has very low cardinality (2 unique).",
+        "recommended_action": "consider encoding as category or dropping if constant-like"
+      }
+    ],
+    "actions": [
+      {
+        "column": "Full Dataset",
+        "operation": "remove_duplicates",
+        "params": {
+          "keep": "first"
+        },
+        "source": "manual",
+        "rationale": "User manual selection"
+      }
+    ],
+    "execution_logs": [
+      {
+        "column": "Full Dataset",
+        "operation": "remove_duplicates",
+        "status": "success",
+        "message": "Removed 723 duplicate row(s)"
+      }
+    ],
+    "evaluation": {
+      "summary": "Overall quality changed by +14.10%. Improved: overall, uniqueness. Regressed: validity. 723 row(s) removed. Actions: 1 succeeded.",
+      "delta": {
+        "overall": 0.141,
+        "completeness": 0.0,
+        "consistency": 0.0,
+        "uniqueness": 0.7054,
+        "validity": -0.0004,
+        "rows_removed": 723,
+        "improved": "True"
+      },
+      "before": {
+        "scores": {
+          "completeness": 1.0,
+          "consistency": 1.0,
+          "uniqueness": 0.2946,
+          "validity": 0.9895,
+          "overall": 0.8563
+        },
+        "details": {
+          "missing_by_column": {},
+          "type_issues_by_column": {},
+          "duplicate_count": 723,
+          "duplicate_percentage": 0.7054,
+          "outlier_count_by_column": {
+            "trestbps": 30,
+            "chol": 16,
+            "thalach": 4,
+            "oldpeak": 7,
+            "ca": 87,
+            "thal": 7
+          }
+        },
+        "dataset_info": {
+          "n_rows": 1025,
+          "n_columns": 14
+        }
+      },
+      "after": {
+        "scores": {
+          "completeness": 1.0,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9891,
+          "overall": 0.9973
+        },
+        "details": {
+          "missing_by_column": {},
+          "type_issues_by_column": {},
+          "duplicate_count": 0,
+          "duplicate_percentage": 0.0,
+          "outlier_count_by_column": {
+            "trestbps": 9,
+            "chol": 5,
+            "thalach": 1,
+            "oldpeak": 5,
+            "ca": 24,
+            "thal": 2
+          }
+        },
+        "dataset_info": {
+          "n_rows": 302,
+          "n_columns": 14
+        }
+      },
+      "score_box": {
+        "before": {
+          "completeness": 1.0,
+          "consistency": 1.0,
+          "uniqueness": 0.2946,
+          "validity": 0.9895,
+          "overall": 0.8563
+        },
+        "after": {
+          "completeness": 1.0,
+          "consistency": 1.0,
+          "uniqueness": 1.0,
+          "validity": 0.9891,
+          "overall": 0.9973
+        },
+        "delta": {
+          "completeness": 0.0,
+          "consistency": 0.0,
+          "uniqueness": 0.7054,
+          "validity": -0.0004,
+          "overall": 0.141
+        },
+        "improved": "True",
+        "rows_removed": 723,
+        "columns_removed": 0,
+        "summary": "Overall quality changed by +14.10%. Improved: overall, uniqueness. Regressed: validity. 723 row(s) removed. Actions: 1 succeeded.",
+        "n_rows_before": 1025,
+        "n_rows_after": 302,
+        "n_cols_before": 14,
+        "n_cols_after": 14
+      }
+    }
+  }
+]
